@@ -77,7 +77,7 @@ group by year
 
 
 
---4 rate per 100,000
+--4 population adjusted rate per 100,000
 
 select m.state, round(sum(m.value)*100000.0/max(s.est_population),0) adjusted_rate 
 from maternal_info m
@@ -92,7 +92,7 @@ group by m.state
 on m.state= s.state_name
 group by m.state
 
- --5 highest deaths within each states
+ --6 highest deaths within each states
  with rank as(
  select state, indicator,sum(value) as deaths,
 dense_rank() over(partition by state order by sum(value) desc) as highest_death_indicator
